@@ -1,0 +1,25 @@
+package com.demo.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.demo.dto.EmployeeDto;
+import com.demo.entity.Employee;
+import com.demo.mapper.EmployeeMapper;
+import com.demo.repository.EmployeeRepo;
+
+@Service
+public class EmployeeServiceImpl implements EmployeeService {
+	
+	@Autowired
+	private EmployeeRepo employeeRepo;
+
+	@Override
+	public EmployeeDto createEmployee(EmployeeDto emp) {
+		
+		Employee e=EmployeeMapper.mapToEmployee(emp);
+		Employee save=employeeRepo.save(e);
+		return EmployeeMapper.mapToEmployeeDto(save);
+	}
+
+}
